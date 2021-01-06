@@ -75,6 +75,8 @@ fsarchiver savefs test.fsa /dev/mmcblk0p1 -v -j8 -Z15
 truncate -s 10G test.img
 losetup /dev/loop1 test.img    # OR find and use free loop device: losetup -f --show test.img
 fsarchiver restfs test.fsa id=0,dest=/dev/loop1
+mount -o ro /dev/loop1 /mnt/test     # OR mount -o loop,ro test.img /mnt/test
+losetup -d /dev/loop1
 ```
 
 
