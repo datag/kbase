@@ -2,6 +2,8 @@
 
 ## GPT
 
+[(source)](https://www.dedoimedo.com/computers/gpt-disk-backup-partition-table.html)
+
 ### Backup
 
 ```bash
@@ -14,8 +16,6 @@ sgdisk --backup=<file> <device>
 sgdisk --load-backup=<backup file> <target device>
 ```
 
-https://www.dedoimedo.com/computers/gpt-disk-backup-partition-table.html
-
 ## Images
 
 ### Create empty sparse file
@@ -24,7 +24,7 @@ https://www.dedoimedo.com/computers/gpt-disk-backup-partition-table.html
 truncate -s 128G test.img
 ```
 
-https://www.systutorials.com/handling-sparse-files-on-linux/
+[(source)](https://www.systutorials.com/handling-sparse-files-on-linux/)
 
 ## Dig holes (make sparse again)
 
@@ -32,7 +32,7 @@ https://www.systutorials.com/handling-sparse-files-on-linux/
 fallocate -v -d test.img
 ```
 
-https://www.systutorials.com/handling-sparse-files-on-linux/#comment-170695
+[(source)](https://www.systutorials.com/handling-sparse-files-on-linux/#comment-170695)
 
 
 ## fsarchiver backup
@@ -45,7 +45,7 @@ fsarchiver savefs test.fsa /dev/mmcblk0p1 -v -j8 -Z15
 
 ```bash
 truncate -s 10G test.img
-losetup /dev/loop1 test.img
+losetup /dev/loop1 test.img    # OR find and use free loop device: losetup -f --show test.img
 fsarchiver restfs test.fsa id=0,dest=/dev/loop1
 ```
 
