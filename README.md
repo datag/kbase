@@ -1,33 +1,5 @@
 # kbase
 
-## rsync
-
-### full clone
-
-```bash
-rsync -aHAXS --info=progress2 /the/source/ /the/destination    # Note the trailing slash for source!
-```
-
-```
---archive, -a            archive mode; equals -rlptgoD (no -H,-A,-X)
---hard-links, -H         preserve hard links
---acls, -A               preserve ACLs (implies --perms)
---xattrs, -X             preserve extended attributes
---sparse, -S             turn sequences of nulls into sparse blocks
-```
-
-[(source)](https://wiki.archlinux.org/index.php/rsync#File_system_cloning)
-
-### quick deletion
-
-```bash
-mkdir empty
-rsync -a --delete ./empty/ /path/to/directory/to/recursively/delete    # Note the trailing slash for source!
-```
-
-[(source)](https://serverfault.com/questions/183821/rm-on-a-directory-with-millions-of-files/513083#513083)
-
-
 ## GPT
 
 [(source)](https://www.dedoimedo.com/computers/gpt-disk-backup-partition-table.html)
@@ -75,21 +47,49 @@ fsarchiver savefs test.fsa /dev/mmcblk0p1 -v -j8 -Z15
 truncate -s 10G test.img
 losetup /dev/loop1 test.img    # OR find and use free loop device: losetup -f --show test.img
 fsarchiver restfs test.fsa id=0,dest=/dev/loop1
-mount -o ro /dev/loop1 /mnt/test     # OR mount -o loop,ro test.img /mnt/test
-losetup -d /dev/loop1
 ```
 
 
-## ODROID
+## Grub2
 
-### Backup of MBR and bootloader
-
-Bootloader resides in unallocated area behind the MBR.
+Reinstall grub2 using another system:
 
 ```bash
-sfdisk -l /dev/mmcblk0    # Note begin of 1st partition; assume 12345
-dd if=/dev/mmcblk0 of=mbr-and-bootloader.bin bs=512 count=12345
+mkdir /mnt/rootfs
+mount /dev/sdX1 /mnt/rootfs
+mount /dev/sdX2 /mnt/rootfs/boot/efi
+mount -t proc proc proc /mnt/rootfs/proc
+mount --rbind /sys /mnt/rootfs/sys   # use rbind so /sys/firmware/efi/efivars is populated
+mount --rbind /dev /mnt/rootfs/dev
+chroot /mnt/rootfs /bin/bash
+
+(chroot) export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin   # depending on system
+(chroot) grub-install /dev/sdX
+(chroot) update-grub2
 ```
 
-[(source)](https://forum.odroid.com/viewtopic.php?t=22930)
+## Secure boot thumb drive without valid signature
+
+  1. rename original bootx64.efi to loader.efi
+  2. rename PreLoader.efi to bootx64.efi
+  3. and it put HashTool.efi in /efi/boot directory
+  4. (if "Failed to start loader"): "Enroll Hash" for "loader.efi"
+
+[(download)](https://blog.hansenpartnership.com/linux-foundation-secure-boot-system-released/)
+[(source)](https://gitlab.com/systemrescue/systemrescue-sources/-/issues/50)
+
+
+
+## Graphics
+
+### Remove EXIF meta data
+
+```bash
+# remove all meta data
+exiftool -all= my-image.jpg
+
+# remove meta data and replace image
+exiftool -overwrite_original -all= my-image.jpg
+```
+
 
