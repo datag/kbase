@@ -93,3 +93,11 @@ exiftool -overwrite_original -all= my-image.jpg
 ```
 
 
+## Audio
+
+### Rip YouTube video/playlist to MP3
+
+```
+youtube-dl -x --audio-quality 0  --audio-format mp3 https://www.youtube.com/watch?v={YT_CODE}
+```
+
