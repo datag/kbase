@@ -79,6 +79,38 @@ chroot /mnt/rootfs /bin/bash
 [(source)](https://gitlab.com/systemrescue/systemrescue-sources/-/issues/50)
 
 
+## ODROID MBR & bootloader backup
+
+[(source)](https://forum.odroid.com/viewtopic.php?t=22930)
+
+
+```bash
+sfdisk -l /dev/mmcblk0
+# find start of first partition, e.g. 49152
+dd if=/dev/mmcblk0 of=mbr-bootloader.bin bs=512 count=49151   # start minus 1 sector
+```
+
+Restore bootloader only:
+
+```bash
+dd if=mbr-bootloader.bin of=/dev/mmcblk0 bs=512 skip=1 seek=1
+```
+
+Restore bootstrap code:
+
+```bash
+dd if=mbr-bootloader.bin of=/dev/mmcblk0 bs=446 count=1
+```
+
+
+## BTRFS
+
+```bash
+btrfs fi usage /media/dominik/DATA
+btrfs balance start -dusage=70 -musage=70 /media/dominik/DATA
+btrfs balance status /media/dominik/DATA
+```
+
 
 ## Graphics
 
