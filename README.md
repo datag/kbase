@@ -52,6 +52,12 @@ fsarchiver restfs test.fsa id=0,dest=/dev/loop1
 
 ## Grub2
 
+Reinstall on system
+
+https://superuser.com/questions/376470/how-to-reinstall-grub2-efi#comment1546454_721045
+
+  sudo grub-install --target=x86_64-efi --efi-directory=/boot/efi
+
 Reinstall grub2 using another system:
 
 ```bash
