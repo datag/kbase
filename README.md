@@ -117,6 +117,18 @@ btrfs balance start -dusage=70 -musage=70 /media/dominik/DATA
 btrfs balance status /media/dominik/DATA
 ```
 
+## rsync
+
+```bash
+rsync -ahSAXH --delete --info=progress2 [ssh-host:]src/ dst
+
+# -a archive
+# -h human
+# -S sparse
+# -A ACLs
+# -X xattrs
+# -H hard links
+```
 
 ## Graphics
 
