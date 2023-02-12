@@ -64,7 +64,7 @@ Reinstall grub2 using another system:
 mkdir /mnt/rootfs
 mount /dev/sdX1 /mnt/rootfs
 mount /dev/sdX2 /mnt/rootfs/boot/efi
-mount -t proc proc proc /mnt/rootfs/proc
+mount -t proc proc /mnt/rootfs/proc
 mount --rbind /sys /mnt/rootfs/sys   # use rbind so /sys/firmware/efi/efivars is populated
 mount --rbind /dev /mnt/rootfs/dev
 chroot /mnt/rootfs /bin/bash
@@ -72,6 +72,20 @@ chroot /mnt/rootfs /bin/bash
 (chroot) export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin   # depending on system
 (chroot) grub-install /dev/sdX
 (chroot) update-grub2
+```
+
+### Maintenance free custom Gub2 screen
+
+https://help.ubuntu.com/community/MaintenanceFreeCustomGrub2Screen
+
+### Fix issue with multi-boot
+
+https://help.ubuntu.com/community/MaintenanceFreeCustomGrub2Screen#If_you_multiboot_mutiple_Linux_installs_and_want_one_Grub_to_control_all_of_your_OSs
+
+On secondary system do:
+```
+sudo dpkg-reconfigure grub-efi-amd64     # if not installed, install first
+# unselect installing into device
 ```
 
 ## Secure boot thumb drive without valid signature
