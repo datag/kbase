@@ -165,7 +165,7 @@ exiftool -overwrite_original -all= my-image.jpg
 youtube-dl -x --audio-quality 0  --audio-format mp3 https://www.youtube.com/watch?v={YT_CODE}
 ```
 
-## Video capture
+## VHS video capture (w/o deinterlacing)
 
 ```shell
 ffmpeg -f alsa -thread_queue_size 4096 -ar 48000 -ac 2 -i hw:1 -f v4l2 -thread_queue_size 4096 -input_format yuyv422 -framerate 25 -i /dev/video0 -vf format=yuv420p -c:v libx264 -preset slow -crf 21 -vprofile baseline -c:a aac -y video.mp4
