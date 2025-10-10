@@ -99,6 +99,28 @@ sudo dpkg-reconfigure grub-efi-amd64     # if not installed, install first
 [(download)](https://blog.hansenpartnership.com/linux-foundation-secure-boot-system-released/)
 [(source)](https://gitlab.com/systemrescue/systemrescue-sources/-/issues/50)
 
+## Customize system-rescue ISO
+
+Download ISO and script [sysrescue-customize](https://www.system-rescue.org/scripts/sysrescue-customize/).
+
+```shell
+sudo apt install xorriso squashfs-tools
+
+sysrescue-customize --unpack --source=systemrescue-12.02-amd64.iso --dest=systemrescue-12.02-iso
+# do modifications
+sysrescue-customize --rebuild --source=systemrescue-12.02-iso --dest=systemrescue-12.02-amd64-DE-zsh.iso
+```
+
+Modifying defaults ([Booting SystemRescue](https://www.system-rescue.org/manual/Booting_SystemRescue/)):
+
+Edit `filesystem/sysrescue.d/100-defaults.yaml` and these:
+
+```yaml
+global:
+    # ...
+    setkmap: "de-latin1-nodeadkeys"
+    rootshell: "/bin/zsh"
+```
 
 ## ODROID MBR & bootloader backup
 
