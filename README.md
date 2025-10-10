@@ -175,6 +175,9 @@ exiftool -all= my-image.jpg
 
 # remove meta data and replace image
 exiftool -overwrite_original -all= my-image.jpg
+
+# try to remove only GPS related metadata
+exiftool -overwrite_original -gps:all= -xmp:geotag= *
 ```
 
 
