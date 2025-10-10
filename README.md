@@ -6,13 +6,13 @@
 
 ### Backup
 
-```bash
+```shell
 sgdisk --backup=<file> <device>
 ```
 
 ### Restore
 
-```bash
+```shell
 sgdisk --load-backup=<backup file> <target device>
 ```
 
@@ -20,7 +20,7 @@ sgdisk --load-backup=<backup file> <target device>
 
 ### Create empty sparse file
 
-```bash
+```shell
 truncate -s 128G test.img
 ```
 
@@ -28,7 +28,7 @@ truncate -s 128G test.img
 
 ## Dig holes (make sparse again)
 
-```bash
+```shell
 fallocate -v -d test.img
 ```
 
@@ -37,13 +37,13 @@ fallocate -v -d test.img
 
 ## fsarchiver backup
 
-```bash
+```shell
 fsarchiver savefs test.fsa /dev/mmcblk0p1 -v -j8 -Z15
 ```
 
 ## fsarchiver "extract"
 
-```bash
+```shell
 truncate -s 10G test.img
 losetup /dev/loop1 test.img    # OR find and use free loop device: losetup -f --show test.img
 fsarchiver restfs test.fsa id=0,dest=/dev/loop1
@@ -52,15 +52,15 @@ fsarchiver restfs test.fsa id=0,dest=/dev/loop1
 
 ## Grub2
 
-Reinstall on system
+Reinstall on system [[source](https://superuser.com/questions/376470/how-to-reinstall-grub2-efi#comment1546454_721045)]:
 
-https://superuser.com/questions/376470/how-to-reinstall-grub2-efi#comment1546454_721045
-
-  sudo grub-install --target=x86_64-efi --efi-directory=/boot/efi
+```shell
+sudo grub-install --target=x86_64-efi --efi-directory=/boot/efi
+```
 
 Reinstall grub2 using another system:
 
-```bash
+```shell
 mkdir /mnt/rootfs
 mount /dev/sdX1 /mnt/rootfs
 mount /dev/sdX2 /mnt/rootfs/boot/efi
@@ -74,7 +74,7 @@ chroot /mnt/rootfs /bin/bash
 (chroot) update-grub2
 ```
 
-### Maintenance free custom Gub2 screen
+### Maintenance-free custom Grub2 screen
 
 https://help.ubuntu.com/community/MaintenanceFreeCustomGrub2Screen
 
@@ -83,7 +83,8 @@ https://help.ubuntu.com/community/MaintenanceFreeCustomGrub2Screen
 https://help.ubuntu.com/community/MaintenanceFreeCustomGrub2Screen#If_you_multiboot_mutiple_Linux_installs_and_want_one_Grub_to_control_all_of_your_OSs
 
 On secondary system do:
-```
+
+```shell
 sudo dpkg-reconfigure grub-efi-amd64     # if not installed, install first
 # unselect installing into device
 ```
@@ -104,7 +105,7 @@ sudo dpkg-reconfigure grub-efi-amd64     # if not installed, install first
 [(source)](https://forum.odroid.com/viewtopic.php?t=22930)
 
 
-```bash
+```shell
 sfdisk -l /dev/mmcblk0
 # find start of first partition, e.g. 49152
 dd if=/dev/mmcblk0 of=mbr-bootloader.bin bs=512 count=49151   # start minus 1 sector
@@ -112,13 +113,13 @@ dd if=/dev/mmcblk0 of=mbr-bootloader.bin bs=512 count=49151   # start minus 1 se
 
 Restore bootloader only:
 
-```bash
+```shell
 dd if=mbr-bootloader.bin of=/dev/mmcblk0 bs=512 skip=1 seek=1
 ```
 
 Restore bootstrap code:
 
-```bash
+```shell
 dd if=mbr-bootloader.bin of=/dev/mmcblk0 bs=446 count=1
 ```
 
@@ -128,7 +129,7 @@ dd if=mbr-bootloader.bin of=/dev/mmcblk0 bs=446 count=1
 
 ### Balance
 
-```bash
+```shell
 btrfs fi usage /media/dominik/DATA
 btrfs balance start -dusage=70 -musage=70 /media/dominik/DATA
 btrfs balance status /media/dominik/DATA
@@ -154,7 +155,7 @@ sudo btrfs send -p /mnt/source-drive/snapshots/@_2025-04-20 /mnt/source-drive/sn
 
 ## rsync
 
-```bash
+```shell
 rsync -ahSAXH --delete --info=progress2 [ssh-host:]src/ dst
 
 # -a archive
@@ -169,7 +170,7 @@ rsync -ahSAXH --delete --info=progress2 [ssh-host:]src/ dst
 
 ### Remove EXIF meta data
 
-```bash
+```shell
 # remove all meta data
 exiftool -all= my-image.jpg
 
