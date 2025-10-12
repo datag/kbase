@@ -41,8 +41,8 @@ jobs:
         npm install
       working-directory: ${{ runner.temp }}
 
-    - name: Copy Quartz config
-      run: cp -v -t $RUNNER_TEMP/quartz .github/quartz/*
+    - name: Copy Quartz customizations
+      run: cp -v -r -t $RUNNER_TEMP/quartz .github/quartz/*
 
     - name: Build
       run: npx quartz build -d $GITHUB_WORKSPACE
