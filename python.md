@@ -1,4 +1,6 @@
-# Python
+---
+title: Python
+---
 
 ## venv
 

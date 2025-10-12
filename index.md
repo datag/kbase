@@ -1,4 +1,6 @@
-# kbase
+---
+title: Home
+---
 
 ## GPT
 
