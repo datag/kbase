@@ -15,7 +15,7 @@ const config: QuartzConfig = {
     analytics: null,
     locale: "de-DE",
     baseUrl: "datag.is-a.dev/kbase",
-    ignorePatterns: [".github", ".obsidian"],
+    ignorePatterns: [".github", ".obsidian", "README.md"],
     defaultDateType: "modified",
     theme: {
       fontOrigin: "googleFonts",  // "local"
