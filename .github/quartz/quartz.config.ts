@@ -11,7 +11,7 @@ const config: QuartzConfig = {
     pageTitle: "kbase – datag's knowledge base",
     pageTitleSuffix: " – kbase",
     enableSPA: true,
-    enablePopovers: true,
+    enablePopovers: false,
     analytics: null,
     locale: "de-DE",
     baseUrl: "datag.is-a.dev/kbase",

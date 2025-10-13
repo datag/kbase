@@ -19,5 +19,4 @@ pip install -r requirements.txt
 
 ```sh
 python3 -m http.server
-
 ```
