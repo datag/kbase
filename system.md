@@ -28,7 +28,7 @@ truncate -s 128G test.img
 
 [(source)](https://www.systutorials.com/handling-sparse-files-on-linux/)
 
-## Dig holes (make sparse again)
+### Dig holes (make sparse again)
 
 ```shell
 fallocate -v -d test.img
@@ -37,13 +37,13 @@ fallocate -v -d test.img
 [(source)](https://www.systutorials.com/handling-sparse-files-on-linux/#comment-170695)
 
 
-## fsarchiver backup
+### fsarchiver backup
 
 ```shell
 fsarchiver savefs test.fsa /dev/mmcblk0p1 -v -j8 -Z15
 ```
 
-## fsarchiver "extract"
+### fsarchiver extract
 
 ```shell
 truncate -s 10G test.img
@@ -52,7 +52,7 @@ fsarchiver restfs test.fsa id=0,dest=/dev/loop1
 ```
 
 
-## Grub2
+## GRUB 2
 
 Reinstall on system [[source](https://superuser.com/questions/376470/how-to-reinstall-grub2-efi#comment1546454_721045)]:
 
@@ -60,7 +60,7 @@ Reinstall on system [[source](https://superuser.com/questions/376470/how-to-rein
 sudo grub-install --target=x86_64-efi --efi-directory=/boot/efi
 ```
 
-Reinstall grub2 using another system:
+Reinstall GRUB 2 using another system:
 
 ```shell
 mkdir /mnt/rootfs
@@ -76,7 +76,7 @@ chroot /mnt/rootfs /bin/bash
 (chroot) update-grub2
 ```
 
-### Maintenance-free custom Grub2 screen
+### Maintenance-free custom GRUB 2 screen
 
 https://help.ubuntu.com/community/MaintenanceFreeCustomGrub2Screen
 
