@@ -8,3 +8,4 @@ title: Home
 * [Utils](utils)
 * Languages
 	* [Python](languages/python)
+* [Electronics](electronics/index)
