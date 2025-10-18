@@ -7,6 +7,7 @@ title: Home
 * [Media](media)
 * [Utils](utils)
 * [QEMU](qemu)
-* Languages
-	* [Python](languages/python)
+* Dev
+	* [Python](dev/python)
+	* [Pimcore](dev/pimcore)
 * [Electronics](electronics/index)
