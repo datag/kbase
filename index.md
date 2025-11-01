@@ -14,6 +14,7 @@ Everything’s shared as-is, with no guarantees or warranties — some stuff mig
 * [QEMU](qemu)
 * [System](system)
 * [BTRFS](btrfs)
+* [USB over IP](usb-over-ip)
 * [Linux](linux)
 * Dev
 	* [Python](dev/python)
