@@ -7,29 +7,39 @@ title: Pimcore
 ```shell
 mkdir pimcore-dev
 
-# OR
+# OR, if BTRFS sub-volume (and later volume mounts into project directory)
 btrfs sub create pimcore-dev
 chown 1000:1000 pimcore-dev
 ```
+
+> [!NOTE]
+> The options to composer's `create-project` command:
+> * `--keep-vcs`: Keep the Git repo of the Pimcore skeleton. Use only if you'd like to contribute to `pimcore/skeleton`.
+> * `--prefer-source`: Whether to have Git repos of the vendor packages. Use only if you'd like to contribute to a 3rd party package.
 
 ```shell
 docker run --rm -ti \
     -v `pwd`:/var/www/html \
     --user 1000:1000 \
     -e COMPOSER_HOME=/tmp -e COMPOSER_CACHE_DIR=/tmp \
-    pimcore/pimcore:php8.3-debug-latest \
+    pimcore/pimcore:php8.4-debug-latest \
     composer -n create-project \
-        --prefer-source \
         --keep-vcs \
-        pimcore/skeleton:2024.x-dev .
+        --prefer-source \
+        pimcore/skeleton:2025.x-dev .
 ```
 
-Adjustments `docker-compose.yaml`:
-* php & supervisord service: User-Group-Mapping 1000:1000
-* FS-Volume-Mounts .docker/mariadb and .docker/rabbitmq
+Optional adjustments to `docker-compose.yaml`:
+* Ports
+* `php` & `supervisord` service:
+	* User-Group-Mapping 1000:1000
+	* PHP version
+* Volume mounts (`mkdir -p .docker/foobar && chmod a+w .docker/foobar`) to have everything self-contained with possibility of BTRFS-snapshotting the whole project:
+	* `.docker/mariadb:/var/lib/mysql`
+	* `.docker/rabbitmq:/var/lib/rabbitmq`
 
 ```shell
-docker compose up
+docker compose up -d
 ```
 
 ```shell
