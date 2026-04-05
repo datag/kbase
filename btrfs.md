@@ -4,10 +4,29 @@ title: BTRFS
 
 ## Balance
 
+Defragments chunks to free up unallocated space.
+
 ```shell
-btrfs fi usage /media/dominik/DATA
-btrfs balance start -dusage=70 -musage=70 /media/dominik/DATA
-btrfs balance status /media/dominik/DATA
+sudo btrfs fi usage /media/dominik/DATA
+sudo btrfs balance start -dusage=15 -musage=5 /media/dominik/DATA
+sudo btrfs balance status /media/dominik/DATA
+```
+
+## Scrub
+
+Reads all data and metadata to verify checksums.
+
+```shell
+sudo btrfs scrub start /media/dominik/DATA
+sudo btrfs scrub status /media/dominik/DATA
+```
+
+## Check
+
+Run on unmounted filesystem.
+
+```shell
+sudo btrfs check --progress /dev/sdXY
 ```
 
 ## Snapshot send/receive
