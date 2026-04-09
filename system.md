@@ -43,7 +43,7 @@ fallocate -v -d test.img
 fsarchiver savefs test.fsa /dev/mmcblk0p1 -v -j8 -Z15
 ```
 
-### fsarchiver extract
+### fsarchiver extract (into temporary image)
 
 ```shell
 truncate -s 10G test.img
@@ -51,6 +51,35 @@ losetup /dev/loop1 test.img    # OR find and use free loop device: losetup -f --
 fsarchiver restfs test.fsa id=0,dest=/dev/loop1
 ```
 
+### Shrink image
+
+```shell
+# Create 1:1 image
+dd if=/dev/mmcblk0 of=backup.img bs=4M status=progress
+
+# Setup loopback device
+# - supporting direct IO access, required for discard
+# - scans for partitions and creates devices for each
+# - use first free loopback device and output its name
+losetup -P --direct-io=on -f --show backup.img
+# outputs used loopback device, e.g. /dev/loop99
+
+# Mount the desired partition (here: "p1") R/W
+mount /dev/loop99p1 /mnt
+
+# Trim unused space -> makes image file sparse
+fstrim -v /mnt
+
+# Unmount and detach image
+umount /mnt
+losetup -d /dev/loop99
+
+# (Optional) If there were bigger non-filesystem regions, dig holes in them as well
+fallocate -v -d backup.img
+
+# Compress
+zstd --rm -v backup.img
+```
 
 ## GRUB 2
 
