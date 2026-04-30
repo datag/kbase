@@ -47,6 +47,16 @@ sudo btrfs send /mnt/source-drive/snapshots/@_2025-04-20 | sudo btrfs receive /m
 sudo btrfs send -p /mnt/source-drive/snapshots/@_2025-04-20 /mnt/source-drive/snapshots/@_2025-04-21 | sudo btrfs receive /mnt/misc-backup/snapshots/@
 ```
 
+### Send to remote host via SSH
+
+> [!info]
+> On the remote host, password-less sudo for `btrfs receive` is required. Use `sudo visudo -f /etc/sudoers.d/btrfs-transfer` with content `my-user ALL=(root) NOPASSWD: /usr/bin/btrfs receive *` (adjust path to btrfs binary) to create such rule.
+
+```shell
+sudo btrfs send /mnt/btrfs/snapshots/@_YYYY-MM-DD | \
+    ssh my-user@192.168.0.6 'sudo btrfs receive /mnt/misc-backup/my-machine/@'
+```
+
 ## Ubuntu 23.04+ encrypted BTRFS setup
 
 [Torsten Bronger](https://gitlab.com/bronger) created the procedure/script [btrfs-encrypt-root](https://gitlab.com/bronger/btrfs-encrypt-root) that brings back the option of having the accustomed BTRFS filesystem layout using `@` and `@home` combined with filesystem encryption.
