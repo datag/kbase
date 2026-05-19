@@ -1,5 +1,6 @@
 ---
 title: AVR basic circuit
+date: 2019-10-13
 ---
 
 Grundschaltung AVR
