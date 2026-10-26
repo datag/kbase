@@ -1,4 +1,4 @@
-# Copilot Instructions
+# AGENTS.md
 
 This is a personal knowledge base published as a static website at [datag.is-a.dev/kbase](https://datag.is-a.dev/kbase/) using [Quartz 4](https://quartz.jzhao.xyz/) on GitHub Pages.
 
