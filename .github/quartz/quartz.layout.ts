@@ -8,6 +8,9 @@ export const sharedPageComponents: SharedLayout = {
   afterBody: [],
   footer: Component.Footer({
     links: {
+      "dominik.geyer@gmail.com": "mailto:dominik.geyer@gmail.com",
+      Datenschutzerklärung: "https://datag.is-a.dev/privacy.html#de",
+      "Privacy Policy": "https://datag.is-a.dev/privacy.html#en",
       GitHub: "https://github.com/datag/kbase",
     },
   }),

@@ -8,7 +8,7 @@ Content lives as Markdown files in the repository root and subdirectories. On pu
 
 Quartz customizations:
 - `.github/quartz/quartz.config.ts` — site config (title, theme, plugins, ignored paths)
-- `.github/quartz/quartz.layout.ts` — page layout and component placement
+- `.github/quartz/quartz.layout.ts` — page layout and component placement; the footer links the operator (`mailto:`) and the privacy policy (`#de`/`#en` on datag.is-a.dev)
 
 The files `.github/`, `.obsidian/`, and `README.md` are excluded from the Quartz build via `ignorePatterns` in `quartz.config.ts`.
 
