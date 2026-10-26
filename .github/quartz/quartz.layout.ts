@@ -1,11 +1,13 @@
 import { PageLayout, SharedLayout } from "./quartz/cfg"
 import * as Component from "./quartz/components"
+import Head from "./quartz/components/Head"
+import PasswordGate from "./quartz/components/PasswordGate"
 
 // components shared across all pages
 export const sharedPageComponents: SharedLayout = {
-  head: Component.Head(),
+  head: Head(),
   header: [],
-  afterBody: [],
+  afterBody: [PasswordGate()],
   footer: Component.Footer({
     links: {
       "dominik.geyer@gmail.com": "mailto:dominik.geyer@gmail.com",

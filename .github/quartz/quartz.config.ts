@@ -18,8 +18,10 @@ const config: QuartzConfig = {
     ignorePatterns: [".github", ".obsidian", "README.md"],
     defaultDateType: "modified",
     theme: {
-      fontOrigin: "googleFonts",  // "local"
-      cdnCaching: true,
+      fontOrigin: "googleFonts", // "local"
+      // cdnCaching false fetches the webfonts at build time and serves them
+      // from this site itself (no requests to Google at runtime)
+      cdnCaching: false,
       typography: {
         header: "Questrial",
         body: "Mate",
@@ -69,7 +71,6 @@ const config: QuartzConfig = {
       Plugin.TableOfContents(),
       Plugin.CrawlLinks({ markdownLinkResolution: "shortest" }),
       Plugin.Description(),
-      Plugin.Latex({ renderEngine: "katex" }),
     ],
     filters: [Plugin.RemoveDrafts()],
     emitters: [
@@ -79,8 +80,8 @@ const config: QuartzConfig = {
       Plugin.FolderPage(),
       Plugin.TagPage(),
       Plugin.ContentIndex({
-        enableSiteMap: true,
-        enableRSS: true,
+        enableSiteMap: false,
+        enableRSS: false,
       }),
       Plugin.Assets(),
       Plugin.Static(),
