@@ -2,10 +2,7 @@
 title: Home
 ---
 
-Hey there! 👋
-This is my personal stash of tech notes — random findings, experiments, and things I’ve learned that I don’t want to forget. I figured they might be useful for others too, so I’m sharing them here.
-
-Everything’s shared as-is, with no guarantees or warranties — some stuff might be outdated, half-baked, or just plain wrong. Use at your own risk (and curiosity)!
+My personal notes on tech topics — random findings, experiments, and things I've learned that I don't want to forget.
 
 ---
 
